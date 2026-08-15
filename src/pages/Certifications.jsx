@@ -18,8 +18,12 @@ export default function Certifications() {
             {certifications.map((cert) => (
               <div key={cert.id} className="glass-card p-6 group hover:border-secondary-green/40 transition-all duration-300">
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 hexagon bg-primary-green/40 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-green/60 transition-colors">
-                    <span className="text-3xl">{cert.icon}</span>
+                  <div className="w-14 h-14 hexagon bg-primary-green/40 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-green/60 transition-colors overflow-hidden">
+                    {cert.icon && (cert.icon.startsWith('/') || cert.icon.startsWith('http')) ? (
+                      <img src={cert.icon} alt={cert.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-3xl">{cert.icon || '🏆'}</span>
+                    )}
                   </div>
                   <div className="flex-1">
                     <h3 className="text-background-light font-semibold mb-1 group-hover:text-accent transition-colors">

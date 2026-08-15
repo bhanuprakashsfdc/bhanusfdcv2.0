@@ -132,8 +132,12 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCerts.map((cert) => (
               <div key={cert.id} className="glass-card p-6 flex items-start gap-4">
-                <div className="w-12 h-12 hexagon bg-primary-green/40 flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">{cert.icon}</span>
+                <div className="w-12 h-12 hexagon bg-primary-green/40 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                  {cert.icon && (cert.icon.startsWith('/') || cert.icon.startsWith('http')) ? (
+                    <img src={cert.icon} alt={cert.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-2xl">{cert.icon || '🏆'}</span>
+                  )}
                 </div>
                 <div>
                   <h3 className="text-background-light font-semibold text-sm mb-1">{cert.name}</h3>
